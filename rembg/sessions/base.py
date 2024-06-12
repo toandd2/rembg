@@ -31,8 +31,9 @@ class BaseSession:
         else:
             self.providers.extend(_providers)
 
+        # refactoring to load directly from model checkpoint
         self.inner_session = ort.InferenceSession(
-            str(self.__class__.download_models(*args, **kwargs)),
+            str(self.model_name),
             providers=self.providers,
             sess_options=sess_opts,
         )
